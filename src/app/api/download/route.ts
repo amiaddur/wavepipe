@@ -24,7 +24,11 @@ export async function GET(request: NextRequest) {
 
   // Generamos un ID único real para evitar colisiones si bajas 2 canciones a la vez
   const tempId = randomUUID(); 
-  const binPath = path.join(process.cwd(), 'bin', 'yt-dlp.exe');
+
+  // DETECCIÓN INTELIGENTE DE SISTEMA OPERATIVO
+  const isWindows = process.platform === 'win32';
+  const binaryName = isWindows ? 'yt-dlp.exe' : 'yt-dlp'; // En Linux no lleva .exe
+  const binPath = path.join(process.cwd(), 'bin', binaryName);
   const tempDir = os.tmpdir(); 
   
   try {

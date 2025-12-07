@@ -49,7 +49,11 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const ytDlpPath = path.join(process.cwd(), 'bin', 'yt-dlp.exe');
+    // DETECCIÓN INTELIGENTE DE SISTEMA OPERATIVO
+    const isWindows = process.platform === 'win32';
+    const binaryName = isWindows ? 'yt-dlp.exe' : 'yt-dlp'; // En Linux no lleva .exe
+    
+    const ytDlpPath = path.join(process.cwd(), 'bin', binaryName);
 
     const args = [
       '--dump-single-json',
