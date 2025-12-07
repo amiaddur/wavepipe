@@ -37,7 +37,7 @@ This project requires a backend component (yt-dlp), so it cannot be hosted on Ve
 
 1.  Clone the repo:
     ```bash
-    git clone [https://github.com/edvincodes/wavepipe.git](https://github.com/edvincodes/wavepipe.git)
+    git clone https://github.com/edvincodes/wavepipe.git
     cd wavepipe
     ```
 
