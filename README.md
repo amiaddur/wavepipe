@@ -29,7 +29,7 @@ This project requires a backend component (yt-dlp), so it cannot be hosted on Ve
 
 ### Prerequisites
 
-1.  **Node.js** (v18 or higher)
+1.  **Node.js** (v20 or higher)
 2.  **FFmpeg** installed on your system path.
 3.  **Python** (required by yt-dlp).
 

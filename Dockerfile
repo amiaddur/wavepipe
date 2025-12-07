@@ -1,8 +1,8 @@
-# 1. Usamos una base ligera de Node.js
-FROM node:18-alpine
+# 1. Usamos Node 20 (Requisito de Next.js 14/15)
+FROM node:20-alpine
 
 # 2. Instalamos las herramientas necesarias (Python, FFmpeg y Curl)
-# Esto es lo que hace que tu app funcione en la nube
+# Nota: En Alpine 20 a veces python3 se llama simplemente python, pero python3 suele funcionar.
 RUN apk add --no-cache python3 ffmpeg curl
 
 # 3. Preparamos la carpeta de trabajo
@@ -18,7 +18,6 @@ RUN npm install -g pnpm && pnpm install --frozen-lockfile
 COPY . .
 
 # 7. TRUCO DE MAGIA: Descargamos yt-dlp versión LINUX
-# Porque el .exe que tienes no sirve aquí.
 RUN mkdir -p bin
 RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o bin/yt-dlp
 RUN chmod +x bin/yt-dlp
