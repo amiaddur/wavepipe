@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌊 WavePipe
 
-## Getting Started
+> The ultimate open-source YouTube downloader. Built with the modern web stack.
 
-First, run the development server:
+![WavePipe Preview](./public/preview.png) 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🚀 **Fast & Clean:** No ads, no tracking, just downloads.
+- 🎵 **Format Support:** Convert to **MP3** (Audio) or **MP4** (Video up to 4k).
+- 📦 **Playlist Support:** Download entire playlists with a smart queue system.
+- 📱 **Responsive Design:** Works perfectly on Desktop and Mobile.
+- 💾 **History:** LocalStorage-based history to keep track of your downloads.
+- 🌈 **Modern UI:** Glassmorphism design with Framer Motion animations.
+- 🏗 **PWA Ready:** Installable as a native app on your device.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Notifications:** [Sonner](https://sonner.emilkowal.ski/)
+- **Core Engine:** [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+- **Language:** TypeScript
 
-## Learn More
+## 🚀 Getting Started locally
 
-To learn more about Next.js, take a look at the following resources:
+This project requires a backend component (yt-dlp), so it cannot be hosted on Vercel's free tier directly without Docker. Here is how to run it on your machine.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  **Node.js** (v18 or higher)
+2.  **FFmpeg** installed on your system path.
+3.  **Python** (required by yt-dlp).
 
-## Deploy on Vercel
+### Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  Clone the repo:
+    ```bash
+    git clone [https://github.com/edvincodes/wavepipe.git](https://github.com/edvincodes/wavepipe.git)
+    cd wavepipe
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2.  Install dependencies:
+    ```bash
+    pnpm install
+    # or npm install
+    ```
+
+3.  **CRITICAL STEP:** Download the engine.
+    - Create a folder named `bin` in the root directory.
+    - Download the latest [yt-dlp.exe](https://github.com/yt-dlp/yt-dlp/releases) (for Windows) or binary (for Linux/Mac).
+    - Place it inside the `/bin` folder.
+
+4.  Run the development server:
+    ```bash
+    pnpm dev
+    ```
+
+5.  Open [http://localhost:3000](http://localhost:3000) with your browser.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/edvincodes/wavepipe/issues).
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Developed with ❤️ by [Edvin](https://github.com/edvincodes)

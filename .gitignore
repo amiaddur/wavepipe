@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Dependencies
+.pnpm-store
+
+# Environment variables
+.env.local
+
+# Binaries (Importante: No subas el exe, el usuario debe descargarlo)
+/bin
+yt-dlp.exe
+
+# OS specific
+Thumbs.db
