@@ -53,13 +53,12 @@ export async function GET(request: NextRequest) {
     '--dump-single-json',
     '--flat-playlist',
     '--no-warnings',
-    // '--no-call-home', <--- BORRADO (Estaba obsoleto)
+    '--no-check-certificate',
+    '--prefer-free-formats',
     
-    // TRUCO 1: Falsificar ser un navegador real
-    '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    
-    // TRUCO 2: Usar la API de Android (Se salta el "Sign in to confirm you're not a bot")
-    '--extractor-args', 'youtube:player_client=android',
+    // CAMBIO CLAVE: Usamos el cliente de iOS (iPhone)
+    // Y quitamos el --user-agent manual para no contradecirnos
+    '--extractor-args', 'youtube:player_client=ios',
     
     url,
   ];
