@@ -3,8 +3,6 @@ import { spawn } from 'child_process';
 import path from 'path';
 
 // --- DEFINICIÓN DE TIPOS ---
-
-// Tipos de respuesta para el Frontend
 type VideoInfo = {
   type: 'video';
   title: string;
@@ -22,14 +20,12 @@ type PlaylistInfo = {
   tracks: { id: string; title: string; duration: string }[];
 };
 
-// Interfaz para los datos crudos que vienen de yt-dlp (evita el uso de 'any')
 interface RawTrack {
   id: string;
   title: string;
   duration: number;
 }
 
-// Auxiliar: Segundos a MM:SS
 const formatDuration = (seconds: number): string => {
   if (!seconds) return "00:00";
   const date = new Date(seconds * 1000);
@@ -51,19 +47,22 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // 1. DETECCIÓN DE SISTEMA OPERATIVO (Crucial para Docker vs Windows)
     const isWindows = process.platform === 'win32';
     const binaryName = isWindows ? 'yt-dlp.exe' : 'yt-dlp';
     const ytDlpPath = path.join(process.cwd(), 'bin', binaryName);
 
-    console.log(`[API Info] Usando motor: ${ytDlpPath}`);
+    console.log(`[API Info] Motor: ${ytDlpPath} | URL: ${url}`);
 
-    // 2. ARGUMENTOS
     const args = [
-      '--dump-single-json', // Devuelve un JSON limpio
-      '--flat-playlist',    // Rápido para listas
+      '--dump-single-json',
+      '--flat-playlist',
       '--no-warnings',
       '--no-call-home',
+      '--no-check-certificate', // Ayuda en entornos Docker con SSL estricto
+      '--prefer-free-formats',
+      '--no-cache-dir',         // <--- CLAVE 1: Evita errores de escritura en disco
+      // <--- CLAVE 2: Simulamos ser un navegador real para evitar bloqueos
+      '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       url
     ];
 
@@ -71,7 +70,6 @@ export async function GET(request: NextRequest) {
         args.push('--yes-playlist');
     }
 
-    // 3. EJECUCIÓN DEL PROCESO
     const child = spawn(ytDlpPath, args);
 
     const chunks: Buffer[] = [];
@@ -82,14 +80,11 @@ export async function GET(request: NextRequest) {
 
     await new Promise((resolve, reject) => {
       child.on('close', (code) => {
-        if (code === 0) resolve(true);
+        // En Linux, a veces el código no es 0 pero devuelve datos válidos
+        if (chunks.length > 0) resolve(true);
         else {
-           // Si hay datos en stdout, a veces ignoramos el código de error no-fatal
-           if (chunks.length > 0) resolve(true);
-           else {
-             const errorMsg = Buffer.concat(errorChunks).toString('utf-8');
-             reject(new Error(`yt-dlp error code ${code}: ${errorMsg}`));
-           }
+           const errorMsg = Buffer.concat(errorChunks).toString('utf-8');
+           reject(new Error(`yt-dlp error code ${code}: ${errorMsg}`));
         }
       });
       child.on('error', (err) => reject(err));
@@ -97,21 +92,26 @@ export async function GET(request: NextRequest) {
 
     const fullOutput = Buffer.concat(chunks).toString('utf-8');
     
-    // 4. PARSEO DE JSON
+    // --- LOG CRÍTICO PARA DEBUG ---
+    // Si falla, mira esto en los logs de Render para ver qué devolvió exactamente
+    if (fullOutput.length < 50) {
+        console.log("Salida sospechosamente corta:", fullOutput);
+    }
+
     let details;
     try {
         if (!fullOutput) throw new Error("Salida vacía de yt-dlp");
         details = JSON.parse(fullOutput);
     } catch {
-        console.error("Error parseando JSON. Output recibido:", fullOutput.substring(0, 200));
+        console.error("Error parseando JSON. Output recibido:", fullOutput.substring(0, 500));
         throw new Error("La respuesta de YouTube no fue un JSON válido.");
     }
 
     if (!details) {
-        throw new Error("No se recibieron detalles del vídeo.");
+        throw new Error("No se recibieron detalles del vídeo (Objeto nulo).");
     }
 
-    // 5. MAPEO DE DATOS (Video vs Playlist)
+    // --- RESPUESTA ---
 
     if (details._type === 'playlist' || (details.entries && details.entries.length > 0)) {
       
@@ -129,7 +129,6 @@ export async function GET(request: NextRequest) {
           duration: formatDuration(item.duration)
         }))
       };
-      
       return NextResponse.json(playlistData);
     
     } else {
@@ -140,24 +139,16 @@ export async function GET(request: NextRequest) {
         thumbnail: details.thumbnail || details.thumbnails?.[0]?.url,
         duration: formatDuration(details.duration),
       };
-
       return NextResponse.json(videoData);
     }
 
   } catch (error: unknown) {
-    // Manejo de error tipado 'unknown' para el linter
     let errorMessage = "Error desconocido";
-    if (error instanceof Error) {
-        errorMessage = error.message;
-    } else if (typeof error === 'string') {
-        errorMessage = error;
-    }
+    if (error instanceof Error) errorMessage = error.message;
+    else if (typeof error === 'string') errorMessage = error;
 
     console.error('[API Error]:', errorMessage);
     
-    return NextResponse.json({ 
-      error: 'Error al obtener datos.',
-      details: errorMessage 
-    }, { status: 500 });
+    return NextResponse.json({ error: 'Error al obtener datos', details: errorMessage }, { status: 500 });
   }
 }

@@ -2,7 +2,7 @@
 FROM node:20-alpine
 
 # 2. Instalamos Python3 y FFmpeg
-RUN apk add --no-cache python3 ffmpeg curl
+RUN apk add --no-cache python3 ffmpeg curl ca-certificates
 
 # --- LA LÍNEA MÁGICA ---
 # Creamos un enlace para que el comando 'python' funcione redirigiendo a 'python3'
