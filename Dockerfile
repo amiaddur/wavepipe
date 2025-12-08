@@ -1,33 +1,28 @@
-# 1. Usamos Node 20 (Alpine)
-FROM node:20-alpine
+# 1. Usamos una base Debian (slim) que es más compatible que Alpine
+FROM node:20-slim
 
-# 2. Instalamos Python3 y FFmpeg
-RUN apk add --no-cache python3 ffmpeg curl ca-certificates
+# 2. Actualizamos e instalamos Python3, PIP y FFmpeg
+# Al usar Debian, esto es mucho más robusto
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip ffmpeg && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# --- LA LÍNEA MÁGICA ---
-# Creamos un enlace para que el comando 'python' funcione redirigiendo a 'python3'
-RUN ln -sf /usr/bin/python3 /usr/bin/python
+# 3. INSTALACIÓN DE YT-DLP VIA PIP
+# En lugar de descargar un archivo, dejamos que Python lo instale y configure
+# La bandera --break-system-packages es necesaria en versiones nuevas de Python
+RUN pip3 install yt-dlp --break-system-packages
 
-# 3. Preparamos carpeta
+# 4. Configuración estándar de Node
 WORKDIR /app
 
-# 4. Copiamos dependencias
 COPY package.json pnpm-lock.yaml* ./
 
-# 5. Instalamos
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
-# 6. Copiamos código
 COPY . .
 
-# 7. Descargamos yt-dlp para Linux
-RUN mkdir -p bin
-RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o bin/yt-dlp
-RUN chmod +x bin/yt-dlp
-
-# 8. Build
 RUN pnpm build
 
-# 9. Start
 EXPOSE 3000
 CMD ["pnpm", "start"]

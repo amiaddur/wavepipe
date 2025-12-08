@@ -48,10 +48,14 @@ export async function GET(request: NextRequest) {
 
   try {
     const isWindows = process.platform === 'win32';
-    const binaryName = isWindows ? 'yt-dlp.exe' : 'yt-dlp';
-    const ytDlpPath = path.join(process.cwd(), 'bin', binaryName);
+    // CAMBIO IMPORTANTE:
+    // En Windows (Localhost): Usamos tu archivo .exe de la carpeta bin
+    // En Linux (Render): Usamos el comando global 'yt-dlp' que instaló PIP
+    const ytDlpCommand = isWindows 
+      ? path.join(process.cwd(), 'bin', 'yt-dlp.exe') 
+      : 'yt-dlp';
 
-    console.log(`[API Info] Motor: ${ytDlpPath} | URL: ${url}`);
+    console.log(`[API Info] Usando comando: ${ytDlpCommand}`);
 
     const args = [
       '--dump-single-json',
@@ -70,7 +74,7 @@ export async function GET(request: NextRequest) {
         args.push('--yes-playlist');
     }
 
-    const child = spawn(ytDlpPath, args);
+    const child = spawn(ytDlpCommand, args);
 
     const chunks: Buffer[] = [];
     const errorChunks: Buffer[] = [];

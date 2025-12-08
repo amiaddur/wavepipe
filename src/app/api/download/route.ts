@@ -27,13 +27,17 @@ export async function GET(request: NextRequest) {
 
   // DETECCIÓN INTELIGENTE DE SISTEMA OPERATIVO
   const isWindows = process.platform === 'win32';
-  const binaryName = isWindows ? 'yt-dlp.exe' : 'yt-dlp'; // En Linux no lleva .exe
-  const binPath = path.join(process.cwd(), 'bin', binaryName);
+  const ytDlpCommand = isWindows 
+        ? path.join(process.cwd(), 'bin', 'yt-dlp.exe') 
+        : 'yt-dlp';
+  
+      console.log(`[API Info] Usando comando: ${ytDlpCommand}`);
+
   const tempDir = os.tmpdir(); 
   
   try {
     // 1. Obtener Título (Rápido)
-    const titleProcess = spawn(binPath, ['--print', 'title', '--no-warnings', url]);
+    const titleProcess = spawn(ytDlpCommand, ['--print', 'title', '--no-warnings', url]);
     let videoTitle = '';
     for await (const chunk of titleProcess.stdout) videoTitle += chunk.toString();
     const cleanTitle = videoTitle ? sanitizeFilename(videoTitle) : 'audio_track';
@@ -61,7 +65,7 @@ export async function GET(request: NextRequest) {
 
     // 3. Ejecutar descarga en el servidor
     await new Promise((resolve, reject) => {
-      const process = spawn(binPath, args);
+      const process = spawn(ytDlpCommand, args);
       
       // Capturamos error si yt-dlp falla (ej: video borrado)
       process.stderr.on('data', (data) => {
