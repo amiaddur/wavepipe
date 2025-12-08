@@ -22,7 +22,7 @@ RUN chmod +x bin/yt-dlp
 
 # 5. Instalamos dependencias de Node.js
 COPY package.json pnpm-lock.yaml* ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile --prod
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
 # 6. Copiamos el resto del código
 COPY . .
